@@ -1,10 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>DetalleVenta</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
+
+<div class="navbar">
+
+    <h2>Gestión de Detalles de Ventas</h2>
+
+    <a href="/home" class="back-home">
+        Volver al Home
+    </a>
+
+</div>
+
+
+<div class="crud-container">
+
+    <div class="crud-header">
+        <h1 class="crud-title">Lista de Detalles de Ventas</h1>
+    </div>
+
+    <div class="crud-actions">
+        <button class="add-btn">
+            Nuevos Detalles
+        </button>
+    </div>
+
+    <table>
+
+        <thead>
+        <tr>
+
+            <th>Código</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Código de Producto</th>
+            <th>Código de Venta</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr>
+
+            <td>1</td>
+            <td>34</td>
+            <td>12.50</td>
+            <td>6</td>
+            <td>3</td>
+
+            <td>
+                <div class="table-actions">
+                    <button class="edit-btn">Editar</button>
+                    <button class="delete-btn">Eliminar</button>
+                </div>
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>2</td>
+            <td>12</td>
+            <td>44.00</td>
+            <td>1</td>
+            <td>7</td>
+
+            <td>
+                <div class="table-actions">
+                    <button class="edit-btn">Editar</button>
+                    <button class="delete-btn">Eliminar</button>
+                </div>
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
 
 </body>
 </html>

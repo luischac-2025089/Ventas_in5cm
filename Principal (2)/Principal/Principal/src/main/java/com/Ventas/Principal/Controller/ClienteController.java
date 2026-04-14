@@ -5,11 +5,14 @@ import com.Ventas.Principal.Service.ClienteService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping ("/api/clientes")
 public class ClienteController {
     private final ClienteService clienteService;
@@ -18,7 +21,9 @@ public class ClienteController {
     }
 
     @GetMapping
-    public List<Clientes> getAllClientes(){return clienteService.getAllClientes();}
+    public String mostrarClientes(){
+        return "clientes";
+    }
 
     @PostMapping
     public ResponseEntity<Object> createClientes(@Valid @RequestBody Clientes clientes){

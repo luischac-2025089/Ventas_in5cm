@@ -5,11 +5,14 @@ import com.Ventas.Principal.Service.VentaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("api/ventas")
 public class VentaController {
     private final VentaService ventaService;
@@ -18,7 +21,9 @@ public class VentaController {
     }
 
     @GetMapping
-    public List<Ventas> getAllVentas(){return ventaService.getAllVentas();}
+    public String mostrarVentas(){
+        return "ventas";
+    }
 
     @PostMapping
     public ResponseEntity<Object> createVentas(@Valid @RequestBody Ventas ventas){

@@ -1,10 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Productos</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
+
+<div class="navbar">
+
+    <h2>Gestión de Productos</h2>
+
+    <a href="/home" class="back-home">
+        Volver al Home
+    </a>
+
+</div>
+
+
+<div class="crud-container">
+
+    <div class="crud-header">
+        <h1 class="crud-title">Lista de Productos</h1>
+    </div>
+
+    <div class="crud-actions">
+        <button class="add-btn">
+            Nuevo Producto
+        </button>
+    </div>
+
+    <table>
+
+        <thead>
+        <tr>
+
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Estado</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr>
+
+            <td>1</td>
+            <td>Producto1</td>
+            <td>12.50</td>
+            <td>65</td>
+            <td>1</td>
+
+            <td>
+                <div class="table-actions">
+                    <button class="edit-btn">Editar</button>
+                    <button class="delete-btn">Eliminar</button>
+                </div>
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>2</td>
+            <td>Producto2</td>
+            <td>44.00</td>
+            <td>0</td>
+            <td>0</td>
+
+            <td>
+                <div class="table-actions">
+                    <button class="edit-btn">Editar</button>
+                    <button class="delete-btn">Eliminar</button>
+                </div>
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
 
 </body>
 </html>

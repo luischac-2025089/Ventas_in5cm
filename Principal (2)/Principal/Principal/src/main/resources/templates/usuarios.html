@@ -1,10 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
+
+<div class="navbar">
+
+    <h2>Gestión de Usuarios</h2>
+
+    <a href="/home" class="back-home">
+        Volver al Home
+    </a>
+
+</div>
+
+
+<div class="crud-container">
+
+    <div class="crud-header">
+        <h1 class="crud-title">Lista de Usuarios</h1>
+    </div>
+
+    <div class="crud-actions">
+        <button class="add-btn">
+            Nuevo Usuario
+        </button>
+    </div>
+
+    <table>
+
+        <thead>
+        <tr>
+
+            <th>Código</th>
+            <th>Nombre de Usuario</th>
+            <th>Contraseña</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Estado</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr>
+
+            <td>1</td>
+            <td>admin</td>
+            <td>admin123</td>
+            <td>admin@gmail.com</td>
+            <td>gerente</td>
+            <td>1</td>
+
+            <td>
+                <div class="table-actions">
+                    <button class="edit-btn">Editar</button>
+                    <button class="delete-btn">Eliminar</button>
+                </div>
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>2</td>
+            <td>juanp</td>
+            <td>jp123</td>
+            <td>juanperez@gmail.com</td>
+            <td>supervisor</td>
+            <td>0</td>
+
+            <td>
+                <div class="table-actions">
+                    <button class="edit-btn">Editar</button>
+                    <button class="delete-btn">Eliminar</button>
+                </div>
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
 
 </body>
 </html>

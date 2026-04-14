@@ -5,11 +5,14 @@ import com.Ventas.Principal.Service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("api/usuarios")
 public class UsuarioController {
     private final UsuarioService usuarioService;
@@ -18,7 +21,9 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public List<Usuarios> getAllUsuarios(){return usuarioService.getAllUsuarios();}
+    public String mostrarUsuarios(){
+        return "usuarios";
+    }
 
     @PostMapping
     public ResponseEntity<Object> createUsuarios(@Valid @RequestBody Usuarios usuarios){
