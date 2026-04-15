@@ -9,19 +9,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
 @RequestMapping("api/usuarios")
 public class UsuarioController {
+
     private final UsuarioService usuarioService;
-    public UsuarioController (UsuarioService usuarioService){
+
+    public UsuarioController(UsuarioService usuarioService){
         this.usuarioService = usuarioService;
     }
 
     @GetMapping
-    public String mostrarUsuarios(){
+    public String mostrarUsuarios(Model model){
+
+        List<Usuarios> usuarios = usuarioService.getAllUsuarios();
+        model.addAttribute("usuarios", usuarios);
+
         return "usuarios";
     }
 
@@ -39,7 +44,7 @@ public class UsuarioController {
     public ResponseEntity<?> deleteUsuarios(@PathVariable Integer id){
         try {
             usuarioService.deleteUsuarios(id);
-            return ResponseEntity.ok("Usuario Eliminado Correctamente");
+            return ResponseEntity.ok("Usuario eliminado correctamente");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
@@ -55,6 +60,5 @@ public class UsuarioController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-
     }
 }

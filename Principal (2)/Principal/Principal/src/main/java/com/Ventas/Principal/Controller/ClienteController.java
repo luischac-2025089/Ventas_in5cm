@@ -9,19 +9,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
-@RequestMapping ("/api/clientes")
+@RequestMapping("api/clientes")
 public class ClienteController {
+
     private final ClienteService clienteService;
-    public ClienteController (ClienteService clienteService){
+
+    public ClienteController(ClienteService clienteService){
         this.clienteService = clienteService;
     }
 
     @GetMapping
-    public String mostrarClientes(){
+    public String mostrarClientes(Model model){
+
+        List<Clientes> listaClientes = clienteService.getAllClientes();
+
+        model.addAttribute("clientes", listaClientes);
+
         return "clientes";
     }
 
@@ -39,7 +45,7 @@ public class ClienteController {
     public ResponseEntity<?> deleteClientes(@PathVariable Integer id){
         try {
             clienteService.deleteClientes(id);
-            return ResponseEntity.ok("Cliente Eliminado Correctamente");
+            return ResponseEntity.ok("Cliente eliminado correctamente");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
@@ -55,6 +61,5 @@ public class ClienteController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-
     }
 }

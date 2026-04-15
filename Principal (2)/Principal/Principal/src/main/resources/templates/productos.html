@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Productos</title>
@@ -18,7 +18,6 @@
 
 </div>
 
-
 <div class="crud-container">
 
     <div class="crud-header">
@@ -35,47 +34,37 @@
 
         <thead>
         <tr>
-
             <th>Código</th>
             <th>Nombre</th>
             <th>Precio</th>
             <th>Stock</th>
             <th>Estado</th>
-
+            <th>Acciones</th>
         </tr>
         </thead>
 
         <tbody>
 
-        <tr>
+        <tr th:each="producto : ${productos}">
 
-            <td>1</td>
-            <td>Producto1</td>
-            <td>12.50</td>
-            <td>65</td>
-            <td>1</td>
-
-            <td>
-                <div class="table-actions">
-                    <button class="edit-btn">Editar</button>
-                    <button class="delete-btn">Eliminar</button>
-                </div>
-            </td>
-
-        </tr>
-
-        <tr>
-
-            <td>2</td>
-            <td>Producto2</td>
-            <td>44.00</td>
-            <td>0</td>
-            <td>0</td>
+            <td th:text="${producto.codigo_producto}"></td>
+            <td th:text="${producto.nombre_producto}"></td>
+            <td th:text="${producto.precio}"></td>
+            <td th:text="${producto.stock}"></td>
+            <td th:text="${producto.estado}"></td>
 
             <td>
                 <div class="table-actions">
-                    <button class="edit-btn">Editar</button>
-                    <button class="delete-btn">Eliminar</button>
+
+                    <button class="edit-btn">
+                        Editar
+                    </button>
+
+                    <button class="delete-btn"
+                            th:onclick="'deleteProducto(' + ${producto.codigo_producto} + ')'">
+                        Eliminar
+                    </button>
+
                 </div>
             </td>
 
@@ -86,6 +75,29 @@
     </table>
 
 </div>
+
+<script>
+
+    function deleteProducto(id){
+
+        if(!confirm("¿Eliminar este producto?")){
+            return;
+        }
+
+        fetch('/api/productos/' + id,{
+            method:'DELETE'
+        })
+        .then(res=>{
+            if(res.ok){
+                location.reload();
+            }else{
+                alert("Error al eliminar");
+            }
+        });
+
+    }
+
+</script>
 
 </body>
 </html>

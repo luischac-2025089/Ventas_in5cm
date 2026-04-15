@@ -307,3 +307,60 @@ button:hover, .action-btn:hover {
 .dashboard{
     padding:100px 40px 40px 40px;
 }
+
+.register-text{
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.register-text a{
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.register-text a:hover{
+    color: #2e7d32;
+    text-decoration: underline;
+}
+
+.profile-container{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-img{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid #4CAF50;
+    object-fit: cover;
+    transition: transform 0.2s;
+}
+
+.profile-img:hover{
+    transform: scale(1.05);
+}
+
+button{
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+button:hover{
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+}
+
+.estado-activo{
+    color: green;
+    font-weight: bold;
+}
+
+.estado-inactivo{
+    color: red;
+    font-weight: bold;
+}

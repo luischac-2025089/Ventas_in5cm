@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>DetalleVenta</title>
@@ -9,15 +9,12 @@
 <body>
 
 <div class="navbar">
-
     <h2>Gestión de Detalles de Ventas</h2>
 
     <a href="/home" class="back-home">
         Volver al Home
     </a>
-
 </div>
-
 
 <div class="crud-container">
 
@@ -27,7 +24,7 @@
 
     <div class="crud-actions">
         <button class="add-btn">
-            Nuevos Detalles
+            Nuevo Detalle
         </button>
     </div>
 
@@ -35,47 +32,37 @@
 
         <thead>
         <tr>
-
             <th>Código</th>
             <th>Cantidad</th>
             <th>Precio Unitario</th>
-            <th>Código de Producto</th>
-            <th>Código de Venta</th>
-
+            <th>Producto</th>
+            <th>Venta</th>
+            <th>Acciones</th>
         </tr>
         </thead>
 
         <tbody>
 
-        <tr>
+        <tr th:each="detalle : ${detalleventas}">
 
-            <td>1</td>
-            <td>34</td>
-            <td>12.50</td>
-            <td>6</td>
-            <td>3</td>
-
-            <td>
-                <div class="table-actions">
-                    <button class="edit-btn">Editar</button>
-                    <button class="delete-btn">Eliminar</button>
-                </div>
-            </td>
-
-        </tr>
-
-        <tr>
-
-            <td>2</td>
-            <td>12</td>
-            <td>44.00</td>
-            <td>1</td>
-            <td>7</td>
+            <td th:text="${detalle.codigo_detalle_venta}"></td>
+            <td th:text="${detalle.cantidad}"></td>
+            <td th:text="${detalle.precio_unitario}"></td>
+            <td th:text="${detalle.productos_codigo_producto}"></td>
+            <td th:text="${detalle.ventas_codigo_venta}"></td>
 
             <td>
                 <div class="table-actions">
-                    <button class="edit-btn">Editar</button>
-                    <button class="delete-btn">Eliminar</button>
+
+                    <button class="edit-btn">
+                        Editar
+                    </button>
+
+                    <button class="delete-btn"
+                            th:onclick="'deleteDetalle(' + ${detalle.codigo_detalle_venta} + ')'">
+                        Eliminar
+                    </button>
+
                 </div>
             </td>
 
@@ -86,6 +73,29 @@
     </table>
 
 </div>
+
+<script>
+
+    function deleteDetalle(id){
+
+        if(!confirm("¿Eliminar este detalle de venta?")){
+            return;
+        }
+
+        fetch('/detalleventas/' + id,{
+            method:'DELETE'
+        })
+        .then(res=>{
+            if(res.ok){
+                location.reload();
+            }else{
+                alert("Error al eliminar");
+            }
+        });
+
+    }
+
+</script>
 
 </body>
 </html>

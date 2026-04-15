@@ -17,7 +17,7 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login","/css/**","/home","/clientes","/usuarios","/productos","/ventas","/detalleventa").permitAll()
+                        .requestMatchers("/login","/css/**","/home","/clientes","/usuarios","/productos","/ventas","/detalleventa", "/register").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
@@ -35,5 +35,4 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return NoOpPasswordEncoder.getInstance();
-    }
-}
+    }}

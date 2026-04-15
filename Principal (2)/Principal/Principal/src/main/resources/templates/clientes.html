@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Clientes</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -12,12 +12,11 @@
 
     <h2>Gestión de Clientes</h2>
 
-    <a href="/home" class="back-home">
+    <a th:href="@{/home}" class="back-home">
         Volver al Home
     </a>
 
 </div>
-
 
 <div class="crud-container">
 
@@ -35,42 +34,24 @@
 
         <thead>
         <tr>
-
             <th>DPI</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Dirección</th>
             <th>Estado</th>
-
+            <th>Acciones</th>
         </tr>
         </thead>
 
         <tbody>
 
-        <tr>
+        <tr th:each="cliente : ${clientes}">
 
-            <td>12345678101</td>
-            <td>Juan</td>
-            <td>Pérez</td>
-            <td>8a Av. 12-34 Z.4</td>
-            <td>1</td>
-
-            <td>
-                <div class="table-actions">
-                    <button class="edit-btn">Editar</button>
-                    <button class="delete-btn">Eliminar</button>
-                </div>
-            </td>
-
-        </tr>
-
-        <tr>
-
-            <td>87654321101</td>
-            <td>Javier</td>
-            <td>del Cid</td>
-            <td>9a Calle 23-55 Z.6</td>
-            <td>0</td>
+            <td th:text="${cliente.dpi_cliente}"></td>
+            <td th:text="${cliente.nombre_cliente}"></td>
+            <td th:text="${cliente.apellido_cliente}"></td>
+            <td th:text="${cliente.direccion}"></td>
+            <td th:text="${cliente.estado}"></td>
 
             <td>
                 <div class="table-actions">

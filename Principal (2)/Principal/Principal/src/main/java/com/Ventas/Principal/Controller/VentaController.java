@@ -9,19 +9,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
 @RequestMapping("api/ventas")
 public class VentaController {
+
     private final VentaService ventaService;
-    public VentaController (VentaService ventaService){
+
+    public VentaController(VentaService ventaService){
         this.ventaService = ventaService;
     }
 
     @GetMapping
-    public String mostrarVentas(){
+    public String mostrarVentas(Model model){
+
+        List<Ventas> ventas = ventaService.getAllVentas();
+        model.addAttribute("ventas", ventas);
+
         return "ventas";
     }
 
@@ -39,7 +44,7 @@ public class VentaController {
     public ResponseEntity<?> deleteVentas(@PathVariable Integer id){
         try {
             ventaService.deleteVentas(id);
-            return ResponseEntity.ok("Venta Eliminado Correctamente");
+            return ResponseEntity.ok("Venta eliminada correctamente");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
@@ -55,6 +60,5 @@ public class VentaController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-
     }
 }

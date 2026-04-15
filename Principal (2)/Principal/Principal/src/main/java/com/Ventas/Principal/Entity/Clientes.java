@@ -8,8 +8,8 @@ import jakarta.validation.constraints.NotNull;
 @Table (name = "clientes")
 public class Clientes {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
 
+    @NotNull(message = "El campo no debe ir vacio")
     @Column(name = "dpi_cliente")
     private Integer dpi_cliente;
 

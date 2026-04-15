@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Ventas</title>
@@ -18,7 +18,6 @@
 
 </div>
 
-
 <div class="crud-container">
 
     <div class="crud-header">
@@ -35,50 +34,39 @@
 
         <thead>
         <tr>
-
             <th>Código</th>
             <th>Fecha de Venta</th>
             <th>Total</th>
             <th>Estado</th>
             <th>DPI de Cliente</th>
             <th>Código de Usuario</th>
-
+            <th>Acciones</th>
         </tr>
         </thead>
 
         <tbody>
 
-        <tr>
+        <tr th:each="venta : ${ventas}">
 
-            <td>1</td>
-            <td>2026-03-03</td>
-            <td>620.50</td>
-            <td>1</td>
-            <td>12345678101</td>
-            <td>4</td>
-
-            <td>
-                <div class="table-actions">
-                    <button class="edit-btn">Editar</button>
-                    <button class="delete-btn">Eliminar</button>
-                </div>
-            </td>
-
-        </tr>
-
-        <tr>
-
-            <td>2</td>
-            <td>2026-26-02</td>
-            <td>44.00</td>
-            <td>0</td>
-            <td>87654312101</td>
-            <td>7</td>
+            <td th:text="${venta.codigo_venta}"></td>
+            <td th:text="${venta.fecha_venta}"></td>
+            <td th:text="${venta.total}"></td>
+            <td th:text="${venta.estado}"></td>
+            <td th:text="${venta.clientes_dpi_cliente}"></td>
+            <td th:text="${venta.usuarios_codigo_usuario}"></td>
 
             <td>
                 <div class="table-actions">
-                    <button class="edit-btn">Editar</button>
-                    <button class="delete-btn">Eliminar</button>
+
+                    <button class="edit-btn">
+                        Editar
+                    </button>
+
+                    <button class="delete-btn"
+                            th:onclick="'deleteVenta(' + ${venta.codigo_venta} + ')'">
+                        Eliminar
+                    </button>
+
                 </div>
             </td>
 
@@ -89,6 +77,29 @@
     </table>
 
 </div>
+
+<script>
+
+    function deleteVenta(id){
+
+        if(!confirm("¿Eliminar esta venta?")){
+            return;
+        }
+
+        fetch('/api/ventas/' + id,{
+            method:'DELETE'
+        })
+        .then(res=>{
+            if(res.ok){
+                location.reload();
+            }else{
+                alert("Error al eliminar");
+            }
+        });
+
+    }
+
+</script>
 
 </body>
 </html>

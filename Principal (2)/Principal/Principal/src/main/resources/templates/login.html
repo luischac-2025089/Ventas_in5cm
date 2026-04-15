@@ -7,6 +7,16 @@
 
 <body>
 
+<div class="profile-container">
+
+    <label for="fotoInput">
+        <img src="../images/perfil.png" id="previewFoto" class="profile-img">
+    </label>
+
+    <input type="file" id="fotoInput" accept="image/*" hidden>
+
+</div>
+
 <div class="login-container">
 
     <div class="login-box">
@@ -23,6 +33,10 @@
 
             <div th:if="${param.error}">
                 Usuario o contraseña incorrectos
+            </div>
+
+            <div class="register-text">
+                <a th:href="@{/register}">¿No tienes una cuenta? Regístrate</a>
             </div>
 
         </form>

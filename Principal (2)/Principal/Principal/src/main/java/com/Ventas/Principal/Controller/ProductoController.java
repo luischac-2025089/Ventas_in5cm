@@ -9,19 +9,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
 @RequestMapping("api/productos")
 public class ProductoController {
+
     private final ProductoService productoService;
-    public ProductoController (ProductoService productoService){
+
+    public ProductoController(ProductoService productoService){
         this.productoService = productoService;
     }
 
     @GetMapping
-    public String mostrarProductos(){
+    public String mostrarProductos(Model model){
+
+        List<Productos> productos = productoService.getAllProductos();
+        model.addAttribute("productos", productos);
+
         return "productos";
     }
 
@@ -39,7 +44,7 @@ public class ProductoController {
     public ResponseEntity<?> deleteProductos(@PathVariable Integer id){
         try {
             productoService.deleteProductos(id);
-            return ResponseEntity.ok("Producto Eliminado Correctamente");
+            return ResponseEntity.ok("Producto eliminado correctamente");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
@@ -55,6 +60,5 @@ public class ProductoController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-
     }
 }
