@@ -25,9 +25,9 @@
     </div>
 
     <div class="crud-actions">
-        <button class="add-btn">
+        <a th:href="@{/clientes/nuevo}" class="add-btn">
             Nuevo Cliente
-        </button>
+        </a>
     </div>
 
     <table>
@@ -55,8 +55,17 @@
 
             <td>
                 <div class="table-actions">
-                    <button class="edit-btn">Editar</button>
-                    <button class="delete-btn">Eliminar</button>
+
+                    <a th:href="@{/clientes/editar/{id}(id=${cliente.dpi_cliente})}" class="edit-btn">
+                        Editar
+                    </a>
+
+                    <form th:action="@{/clientes/eliminar/{id}(id=${cliente.dpi_cliente})}" method="post">
+                        <button type="submit" class="delete-btn">
+                            Eliminar
+                        </button>
+                    </form>
+
                 </div>
             </td>
 

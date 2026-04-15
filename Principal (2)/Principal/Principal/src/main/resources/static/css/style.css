@@ -100,6 +100,11 @@ body{
     padding:15px 40px;
     background:#111827;
     border-bottom:2px solid #3b82f6;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
 }
 
 .user-info{
@@ -125,7 +130,7 @@ body{
 /* DASHBOARD */
 
 .dashboard{
-    padding:40px;
+    padding:100px 40px 40px 40px;
 }
 
 .dashboard h1{
@@ -157,100 +162,112 @@ body{
 }
 
 /* TABLAS CRUD */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 30px;
-    background: #1f2937;
-    border-radius: 10px;
-    overflow: hidden;
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:30px;
+    background:#1f2937;
+    border-radius:10px;
+    overflow:hidden;
 }
 
-thead {
-    background: #3b82f6;
-    color: white;
+thead{
+    background:#3b82f6;
+    color:white;
 }
 
-thead th {
-    padding: 12px;
-    text-align: left;
+thead th{
+    padding:12px;
+    text-align:left;
 }
 
-tbody td {
-    padding: 10px;
-    border-bottom: 1px solid #111827;
+tbody td{
+    padding:10px;
+    border-bottom:1px solid #111827;
 }
 
-tbody tr:nth-child(even) {
-    background: #111827;
+tbody tr:nth-child(even){
+    background:#111827;
 }
 
-tbody tr:hover {
-    background: #2563eb;
-    cursor: pointer;
+tbody tr:hover{
+    background:#2563eb;
+    cursor:pointer;
 }
 
 /* BOTONES CRUD */
-button, .action-btn {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    color: white;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    transition: 0.2s;
+
+button, .action-btn{
+    padding:8px 14px;
+    border:none;
+    border-radius:6px;
+    font-weight:bold;
+    font-size:14px;
+    color:white;
+    cursor:pointer;
+    display:inline-block;
+    transition:0.2s;
 }
 
-button:hover, .action-btn:hover {
-    opacity: 0.9;
+button{
+    letter-spacing:0.5px;
 }
 
-.add-btn {
-    background: #3b82f6;
+button:hover, .action-btn:hover{
+    opacity:0.9;
+    transform:translateY(-2px);
+    box-shadow:0px 4px 10px rgba(0,0,0,0.2);
 }
 
-.add-btn:hover {
-    background: #2563eb;
+.add-btn{
+    background:#3b82f6;
+    display:inline-block;
 }
 
-.edit-btn {
-    background: #facc15;
-    color: #111827;
+.add-btn:hover{
+    background:#2563eb;
 }
 
-.edit-btn:hover {
-    background: #eab308;
+.edit-btn{
+    background:#facc15;
+    color:#111827;
+    display:inline-block;
 }
 
-.delete-btn {
-    background: #ef4444;
+.edit-btn:hover{
+    background:#eab308;
 }
 
-.delete-btn:hover {
-    background: #dc2626;
+.delete-btn{
+    background:#ef4444;
+    display:inline-block;
+}
+
+.delete-btn:hover{
+    background:#dc2626;
 }
 
 /* VOLVER A HOME */
-.back-home {
-    display: inline-block;
-    padding: 8px 16px;
-    background: #3b82f6;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    margin-bottom: 20px;
+
+.back-home{
+    display:inline-block;
+    padding:8px 16px;
+    background:#3b82f6;
+    color:white;
+    border-radius:8px;
+    text-decoration:none;
+    margin-bottom:20px;
 }
 
-.back-home:hover {
-    background: #2563eb;
+.back-home:hover{
+    background:#2563eb;
 }
 
-/*contenedores CRUD*/
+/* CONTENEDORES CRUD */
+
 .crud-container{
-    padding:40px;
+    padding:100px 40px 40px 40px;
     max-width:1200px;
     margin:auto;
 }
@@ -267,14 +284,16 @@ button:hover, .action-btn:hover {
     font-weight:bold;
 }
 
-/*barra superior de acciones*/
+/* barra superior de acciones */
+
 .crud-actions{
     display:flex;
     gap:15px;
     margin-bottom:20px;
 }
 
-/*botones de la tabla*/
+/* botones de la tabla */
+
 .table-actions{
     display:flex;
     gap:10px;
@@ -284,7 +303,8 @@ button:hover, .action-btn:hover {
     font-size:14px;
 }
 
-/*mensaje de falta de datos*/
+/* mensaje de falta de datos */
+
 .empty-table{
     text-align:center;
     padding:20px;
@@ -292,75 +312,61 @@ button:hover, .action-btn:hover {
     font-style:italic;
 }
 
-.navbar{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    z-index:1000;
-}
-
-.crud-container{
-    padding:100px 40px 40px 40px;
-}
-
-.dashboard{
-    padding:100px 40px 40px 40px;
-}
+/* registro */
 
 .register-text{
-    margin-top: 15px;
-    text-align: center;
-    font-size: 14px;
-    color: #666;
+    margin-top:15px;
+    text-align:center;
+    font-size:14px;
+    color:#666;
 }
 
 .register-text a{
-    color: #4CAF50;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.2s ease;
+    color:#4CAF50;
+    text-decoration:none;
+    font-weight:600;
+    transition:all 0.2s ease;
 }
 
 .register-text a:hover{
-    color: #2e7d32;
-    text-decoration: underline;
+    color:#2e7d32;
+    text-decoration:underline;
 }
 
-.profile-container{
-    text-align: center;
-    margin-bottom: 20px;
+/* foto login */
+
+.foto-login{
+    text-align:center;
+    margin-bottom:20px;
 }
 
-.profile-img{
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 3px solid #4CAF50;
-    object-fit: cover;
-    transition: transform 0.2s;
+.foto-perfil{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    border:3px solid #4CAF50;
+    cursor:pointer;
+    object-fit:cover;
+    transition:transform 0.2s, box-shadow 0.2s;
 }
 
-.profile-img:hover{
-    transform: scale(1.05);
+.foto-perfil:hover{
+    transform:scale(1.05);
+    box-shadow:0px 4px 10px rgba(0,0,0,0.2);
 }
 
-button{
-    transition: transform 0.15s, box-shadow 0.15s;
+#fotoInput{
+    display:none;
 }
 
-button:hover{
-    transform: translateY(-2px);
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-}
+/* estados */
 
 .estado-activo{
-    color: green;
-    font-weight: bold;
+    color:green;
+    font-weight:bold;
 }
 
 .estado-inactivo{
-    color: red;
-    font-weight: bold;
+    color:red;
+    font-weight:bold;
 }

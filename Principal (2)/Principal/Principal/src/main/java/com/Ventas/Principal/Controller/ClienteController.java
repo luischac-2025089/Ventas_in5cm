@@ -2,9 +2,6 @@ package com.Ventas.Principal.Controller;
 
 import com.Ventas.Principal.Entity.Clientes;
 import com.Ventas.Principal.Service.ClienteService;
-import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("api/clientes")
+@RequestMapping("/clientes")
 public class ClienteController {
 
     private final ClienteService clienteService;
@@ -31,35 +28,37 @@ public class ClienteController {
         return "clientes";
     }
 
-    @PostMapping
-    public ResponseEntity<Object> createClientes(@Valid @RequestBody Clientes clientes){
-        try{
-            Clientes createdClientes = clienteService.saveClientes(clientes);
-            return new ResponseEntity<>(createdClientes, HttpStatus.CREATED);
-        }catch (IllegalArgumentException e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    @GetMapping("/nuevo")
+    public String nuevoCliente(Model model){
+
+        model.addAttribute("cliente", new Clientes());
+
+        return "clientesForm";
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteClientes(@PathVariable Integer id){
-        try {
-            clienteService.deleteClientes(id);
-            return ResponseEntity.ok("Cliente eliminado correctamente");
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+    @PostMapping("/guardar")
+    public String guardarCliente(@ModelAttribute Clientes cliente){
+
+        clienteService.saveClientes(cliente);
+
+        return "redirect:/clientes";
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateClientes(@PathVariable Integer id, @RequestBody Clientes clientes) {
+    @GetMapping("/editar/{id}")
+    public String editarCliente(@PathVariable Integer id, Model model){
 
-        try {
-            Clientes actualizado = clienteService.updateClientes(id, clientes);
-            return ResponseEntity.ok(actualizado);
+        Clientes cliente = clienteService.getClientesById(id);
 
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+        model.addAttribute("cliente", cliente);
+
+        return "clientesForm";
+    }
+
+    @PostMapping("/eliminar/{id}")
+    public String eliminarCliente(@PathVariable Integer id){
+
+        clienteService.deleteClientes(id);
+
+        return "redirect:/clientes";
     }
 }
