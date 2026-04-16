@@ -13,6 +13,18 @@
     <h2>Sistema de Ventas</h2>
 
     <div class="user-info">
+        <div class="foto-login">
+
+            <img th:src="${rol == 'administrador'} ? @{/img/admin.png} : @{/img/user.png}"
+                 class="foto-perfil">
+
+            <p th:text="${rol}"></p>
+
+        </div>
+
+        <div class="user-info">
+            <span th:text="${username}"></span>
+        </div>
         <span>Usuario activo</span>
 
         <form th:action="@{/logout}" method="post">
@@ -33,19 +45,19 @@
             Clientes
         </a>
 
-        <a th:href="@{api/productos}" class="crud-card">
+        <a th:href="@{/productos}" class="crud-card">
             Productos
         </a>
 
-        <a th:href="@{api/ventas}" class="crud-card">
+        <a th:href="@{/ventas}" class="crud-card">
             Ventas
         </a>
 
-        <a th:href="@{api/detalleventas}" class="crud-card">
+        <a th:href="@{/detalleventas}" class="crud-card">
             DetalleVenta
         </a>
 
-        <a th:href="@{api/usuarios}" class="crud-card">
+        <a th:href="@{/usuarios}" class="crud-card">
             Usuarios
         </a>
 

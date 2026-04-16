@@ -3,7 +3,7 @@
 
 <head>
     <title>Usuarios</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -12,7 +12,7 @@
 
     <h2>Gestión de Usuarios</h2>
 
-    <a href="/home" class="back-home">
+    <a th:href="@{/home}" class="back-home">
         Volver al Home
     </a>
 
@@ -24,10 +24,11 @@
         <h1 class="crud-title">Lista de Usuarios</h1>
     </div>
 
+    <!-- BOTÓN NUEVO -->
     <div class="crud-actions">
-        <button class="add-btn">
+        <a th:href="@{/usuarios/nuevo}" class="action-btn add-btn">
             Nuevo Usuario
-        </button>
+        </a>
     </div>
 
     <table>
@@ -58,14 +59,18 @@
             <td>
                 <div class="table-actions">
 
-                    <button class="edit-btn">
+                    <!-- EDITAR -->
+                    <a th:href="@{/usuarios/editar/{id}(id=${usuario.codigo_usuario})}"
+                       class="action-btn edit-btn">
                         Editar
-                    </button>
+                    </a>
 
-                    <button class="delete-btn"
-                            th:onclick="'deleteUsuario(' + ${usuario.codigo_usuario} + ')'">
+                    <!-- ELIMINAR -->
+                    <a th:href="@{/usuarios/eliminar/{id}(id=${usuario.codigo_usuario})}"
+                       class="action-btn delete-btn"
+                       onclick="return confirm('¿Eliminar este usuario?')">
                         Eliminar
-                    </button>
+                    </a>
 
                 </div>
             </td>
@@ -77,29 +82,6 @@
     </table>
 
 </div>
-
-<script>
-
-    function deleteUsuario(id){
-
-        if(!confirm("¿Eliminar este usuario?")){
-            return;
-        }
-
-        fetch('/api/usuarios/' + id,{
-            method:'DELETE'
-        })
-        .then(res=>{
-            if(res.ok){
-                location.reload();
-            }else{
-                alert("Error al eliminar");
-            }
-        });
-
-    }
-
-</script>
 
 </body>
 </html>

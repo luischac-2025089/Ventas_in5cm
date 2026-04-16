@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("api/usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -23,42 +23,31 @@ public class UsuarioController {
 
     @GetMapping
     public String mostrarUsuarios(Model model){
-
-        List<Usuarios> usuarios = usuarioService.getAllUsuarios();
-        model.addAttribute("usuarios", usuarios);
-
+        model.addAttribute("usuarios", usuarioService.getAllUsuarios());
         return "usuarios";
     }
 
-    @PostMapping
-    public ResponseEntity<Object> createUsuarios(@Valid @RequestBody Usuarios usuarios){
-        try{
-            Usuarios createdUsuario = usuarioService.saveUsuarios(usuarios);
-            return new ResponseEntity<>(createdUsuario, HttpStatus.CREATED);
-        }catch (IllegalArgumentException e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    @GetMapping("/nuevo")
+    public String nuevo(Model model){
+        model.addAttribute("usuario", new Usuarios());
+        return "usuariosForm";
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUsuarios(@PathVariable Integer id){
-        try {
-            usuarioService.deleteUsuarios(id);
-            return ResponseEntity.ok("Usuario eliminado correctamente");
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+    @PostMapping("/guardar")
+    public String guardar(@ModelAttribute Usuarios usuarios){
+        usuarioService.saveUsuarios(usuarios);
+        return "redirect:/usuarios";
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateUsuarios(@PathVariable Integer id, @RequestBody Usuarios usuarios) {
+    @GetMapping("/editar/{id}")
+    public String editar(@PathVariable Integer id, Model model){
+        model.addAttribute("usuario", usuarioService.getUsuariosById(id));
+        return "usuariosForm";
+    }
 
-        try {
-            Usuarios actualizado = usuarioService.updateUsuarios(id, usuarios);
-            return ResponseEntity.ok(actualizado);
-
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable Integer id){
+        usuarioService.deleteUsuarios(id);
+        return "redirect:/usuarios";
     }
 }

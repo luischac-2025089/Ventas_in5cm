@@ -3,7 +3,7 @@
 
 <head>
     <title>Ventas</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -12,7 +12,7 @@
 
     <h2>Gestión de Ventas</h2>
 
-    <a href="/home" class="back-home">
+    <a th:href="@{/home}" class="back-home">
         Volver al Home
     </a>
 
@@ -25,9 +25,9 @@
     </div>
 
     <div class="crud-actions">
-        <button class="add-btn">
+        <a th:href="@{/ventas/nuevo}" class="action-btn add-btn">
             Nueva Venta
-        </button>
+        </a>
     </div>
 
     <table>
@@ -58,14 +58,16 @@
             <td>
                 <div class="table-actions">
 
-                    <button class="edit-btn">
+                    <a th:href="@{/ventas/editar/{id}(id=${venta.codigo_venta})}"
+                       class="action-btn edit-btn">
                         Editar
-                    </button>
+                    </a>
 
-                    <button class="delete-btn"
-                            th:onclick="'deleteVenta(' + ${venta.codigo_venta} + ')'">
+                    <a th:href="@{/ventas/eliminar/{id}(id=${venta.codigo_venta})}"
+                       class="action-btn delete-btn"
+                       onclick="return confirm('¿Eliminar esta venta?')">
                         Eliminar
-                    </button>
+                    </a>
 
                 </div>
             </td>
@@ -77,29 +79,6 @@
     </table>
 
 </div>
-
-<script>
-
-    function deleteVenta(id){
-
-        if(!confirm("¿Eliminar esta venta?")){
-            return;
-        }
-
-        fetch('/api/ventas/' + id,{
-            method:'DELETE'
-        })
-        .then(res=>{
-            if(res.ok){
-                location.reload();
-            }else{
-                alert("Error al eliminar");
-            }
-        });
-
-    }
-
-</script>
 
 </body>
 </html>

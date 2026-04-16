@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("api/detalleventas")
+@RequestMapping("/detalleventas")
 public class DetalleVentaController {
 
     private final DetalleVentaService detalleVentaService;
@@ -23,28 +23,31 @@ public class DetalleVentaController {
 
     @GetMapping
     public String mostrarDetalleVenta(Model model){
-        List<DetalleVenta> lista = detalleVentaService.getAllDetalleVenta();
-        model.addAttribute("detalleventas", lista);
-        return "detalleVenta";
+        model.addAttribute("detalleventas", detalleVentaService.getAllDetalleVenta());
+        return "detalleventa";
     }
 
-    @PostMapping
-    public ResponseEntity<?> createDetalleVenta(@Valid @RequestBody DetalleVenta detalleVenta){
-        DetalleVenta created = detalleVentaService.saveDetalleVenta(detalleVenta);
-        return new ResponseEntity<>(created, HttpStatus.CREATED);
+    @GetMapping("/nuevo")
+    public String nuevo(Model model){
+        model.addAttribute("detalleventa", new DetalleVenta());
+        return "detalleventaForm";
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteDetalleVenta(@PathVariable Integer id){
+    @PostMapping("/guardar")
+    public String guardar(@ModelAttribute DetalleVenta detalleVenta){
+        detalleVentaService.saveDetalleVenta(detalleVenta);
+        return "redirect:/detalleventas";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String editar(@PathVariable Integer id, Model model){
+        model.addAttribute("detalleventa", detalleVentaService.getDetalleVentaById(id));
+        return "detalleventaForm";
+    }
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable Integer id){
         detalleVentaService.deleteDetalleVenta(id);
-        return ResponseEntity.ok("Detalle eliminado");
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateDetalleVenta(@PathVariable Integer id,
-                                                @RequestBody DetalleVenta detalleVenta){
-
-        DetalleVenta actualizado = detalleVentaService.updateDetalleVenta(id, detalleVenta);
-        return ResponseEntity.ok(actualizado);
+        return "redirect:/detalleventas";
     }
 }

@@ -3,7 +3,7 @@
 
 <head>
     <title>Productos</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -12,7 +12,7 @@
 
     <h2>Gestión de Productos</h2>
 
-    <a href="/home" class="back-home">
+    <a th:href="@{/home}" class="back-home">
         Volver al Home
     </a>
 
@@ -24,10 +24,11 @@
         <h1 class="crud-title">Lista de Productos</h1>
     </div>
 
+    <!-- BOTÓN NUEVO -->
     <div class="crud-actions">
-        <button class="add-btn">
+        <a th:href="@{/productos/nuevo}" class="action-btn add-btn">
             Nuevo Producto
-        </button>
+        </a>
     </div>
 
     <table>
@@ -56,14 +57,18 @@
             <td>
                 <div class="table-actions">
 
-                    <button class="edit-btn">
+                    <!-- EDITAR -->
+                    <a th:href="@{/productos/editar/{id}(id=${producto.codigo_producto})}"
+                       class="action-btn edit-btn">
                         Editar
-                    </button>
+                    </a>
 
-                    <button class="delete-btn"
-                            th:onclick="'deleteProducto(' + ${producto.codigo_producto} + ')'">
+                    <!-- ELIMINAR -->
+                    <a th:href="@{/productos/eliminar/{id}(id=${producto.codigo_producto})}"
+                       class="action-btn delete-btn"
+                       onclick="return confirm('¿Eliminar este producto?')">
                         Eliminar
-                    </button>
+                    </a>
 
                 </div>
             </td>
@@ -75,29 +80,6 @@
     </table>
 
 </div>
-
-<script>
-
-    function deleteProducto(id){
-
-        if(!confirm("¿Eliminar este producto?")){
-            return;
-        }
-
-        fetch('/api/productos/' + id,{
-            method:'DELETE'
-        })
-        .then(res=>{
-            if(res.ok){
-                location.reload();
-            }else{
-                alert("Error al eliminar");
-            }
-        });
-
-    }
-
-</script>
 
 </body>
 </html>
